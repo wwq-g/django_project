@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .form-edit{
+        margin-left: 15em;
+        margin-right: 15em;
+    }
+    .but{
+
+        background: #004faf;
+    }
+</style>
+<body>
+{% extends 'base.html' %}
+
+{% block cen %}
+  
+
+  
+<br>
+<form class="form-edit" method="POST" action={{ home }}>
+    {% csrf_token %}
+    <div class="form-group">
+    <input name="xiuwan" class="form-control form-control-lg" id="editTodo" type="text" value={{ xiu }}>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">提交</button>
+    <br>
+    {{ warning }}
+</form>
+
+{% endblock cen %}
+</body>
+</html>

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    {% block cen %}
+        
+    
+    {{ warning }}
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">sort</th>
+                    <th scope="col">backlog</th>
+                    <th scope="col">compile</th>
+                    <th scope="col">complete</th>
+                    <th scope="col">delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  {% for ls in list %}
+                  
+                  {% if ls.done %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td style="color: rebeccapurple;text-decoration:line-through;">  {{ ls.thing }}</td>
+                      <td ><a href="#" class="com">not compile</a></td>
+                      <td>
+
+                      <form method=POST action=" {% url 'cross' ls.id %}">
+                          {% csrf_token %}
+                          <input name="inp" type="hidden" value="a">
+                      <button type="submit" class="btn btn-sm ">remove</button>
+                      </form>
+
+                    </td>
+                      <form method=POST action=" {% url 'delet' ls.id %}">
+                          {% csrf_token %}
+                      <td><button type="submit" class="btn btn-sm ">delet</button></td>
+                    </form>
+                    </tr>
+                  {% else %}
+                    <tr>
+                      <th scope="row">{{ forloop.counter }}</th>
+                      <td style="color: rebeccapurple;">  {{ ls.thing }}</td>
+                      <td ><a href="{% url 'compile' ls.id %}" class="com">compile</a></td>
+                      <td>
+                      <form method=POST action=" {% url 'cross' ls.id %}">
+                          {% csrf_token %}
+                          <input name="inp" type="hidden" value="b">
+                      <button type="submit" class="btn btn-sm ">stroke</button>
+                      </form>
+                    </td>
+                      <form method=POST action=" {% url 'delet' ls.id %}">
+                          {% csrf_token %}
+                      <td><button type="submit" class="btn btn-sm ">delet</button></td>
+                    </form>
+                    </tr>
+                  {% endif %}
+                    
+                  
+                  {% endfor %}
+                    
+                 
+                  <!-- <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td ><a href="/todo/compile" class="com">compile</a></td>
+                    <td><a href="#" class="era">erase</a></td>
+                    <td><a href="#" class="del">delete</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                     <td ><a href="/todo/compile" class="com">compile</a></td>
+                     <td><a href="#" class="era">erase</a></td>
+                    <td><a href="#" class="del">delete</a></td>
+                  </tr> -->
+                </tbody>
+              </table>
+             
+
+              {% endblock cen %}
+    
+</body>
+</html>
